@@ -1,0 +1,5 @@
+Senha postgres pentaho:
+123
+
+Salvar as conexões apenas depois de usar (se nao não salva)
+Verificar a sql de saida antes de rodar
