@@ -1,6 +1,7 @@
 Conexões:
 
 /vestibular 	- Dados "brutos"
+
 /dwtd_db	- Data Wharehouse
 
 Dimensões:

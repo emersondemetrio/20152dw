@@ -130,23 +130,19 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>END_TRANS</from><to>Output&#x3a; dm_candidato1</to><enabled>Y</enabled> </hop>
-  <hop> <from>END_TRANS</from><to>Seq&#x3a; candidato</to><enabled>Y</enabled> </hop>
-  <hop> <from>Edit&#x3a; socioecn</from><to>Prep&#x3a; socioecn_p_numerico</to><enabled>Y</enabled> </hop>
-  <hop> <from>Filter&#x3a; Vest. por Exp.</from><to>Edit&#x3a; socioecn</to><enabled>Y</enabled> </hop>
-  <hop> <from>If&#x3a; trabalha</from><to>If&#x3a; pre_vestibular</to><enabled>Y</enabled> </hop>
-  <hop> <from>Load&#x3a; candidados</from><to>Filter&#x3a; Vest. por Exp.</to><enabled>Y</enabled> </hop>
-  <hop> <from>Load&#x3a; renda_familiar</from><to>Lookup&#x3a; renda</to><enabled>Y</enabled> </hop>
-  <hop> <from>Load&#x3a; sexo</from><to>Fix&#x3a; id_sexo</to><enabled>Y</enabled> </hop>
-  <hop> <from>Prep&#x3a; de_para</from><to>Out&#x3a; dm_candidato2</to><enabled>N</enabled> </hop>
+  <hop> <from>END_TRANS</from><to>Seq&#x3a; socioeconomico</to><enabled>Y</enabled> </hop>
   <hop> <from>Prep&#x3a; de_para</from><to>Wait delete</to><enabled>Y</enabled> </hop>
-  <hop> <from>Prep&#x3a; socioecn_p_numerico</from><to>If&#x3a; trabalha</to><enabled>Y</enabled> </hop>
-  <hop> <from>Seq&#x3a; candidato</from><to>Prep&#x3a; de_para</to><enabled>Y</enabled> </hop>
+  <hop> <from>Seq&#x3a; socioeconomico</from><to>Prep&#x3a; de_para</to><enabled>Y</enabled> </hop>
   <hop> <from>Wait delete</from><to>SALVAR DM</to><enabled>Y</enabled> </hop>
+  <hop> <from>Load&#x3a; candidados</from><to>Edit&#x3a; socioecn</to><enabled>Y</enabled> </hop>
+  <hop> <from>Edit&#x3a; socioecn</from><to>Out&#x3a; socioecn1</to><enabled>N</enabled> </hop>
+  <hop> <from>Edit&#x3a; socioecn</from><to>Prep&#x3a; socioecn_p_numerico</to><enabled>Y</enabled> </hop>
+  <hop> <from>Prep&#x3a; socioecn_p_numerico</from><to>Script&#x3a; faixa_etaria</to><enabled>Y</enabled> </hop>
+  <hop> <from>Script&#x3a; faixa_etaria</from><to>END_TRANS</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>Calc&#x3a; idade</name>
-    <type>Calculator</type>
+    <name>Clear&#x3a; dm_socioeconomico</name>
+    <type>ExecSQL</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -155,38 +151,23 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-       <calculation><field_name>ano_nascimento</field_name>
-<calc_type>YEAR_OF_DATE</calc_type>
-<field_a>data_nascimento</field_a>
-<field_b/>
-<field_c/>
-<value_type>Integer</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<remove>N</remove>
-<conversion_mask/>
-<decimal_symbol/>
-<grouping_symbol/>
-<currency_symbol/>
-</calculation>
-       <calculation><field_name>idade</field_name>
-<calc_type>SUBTRACT</calc_type>
-<field_a>ano_evento</field_a>
-<field_b>ano_nascimento</field_b>
-<field_c/>
-<value_type>Integer</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<remove>N</remove>
-<conversion_mask/>
-<decimal_symbol/>
-<grouping_symbol/>
-<currency_symbol/>
-</calculation>
+    <connection>DB_DW</connection>
+    <execute_each_row>N</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>DELETE&#xd;&#xa;FROM&#xd;&#xa;	dm_socioeconomico&#x3b;</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+    </arguments>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>848</xloc>
-      <yloc>352</yloc>
+      <xloc>80</xloc>
+      <yloc>32</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -204,8 +185,8 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>320</xloc>
-      <yloc>464</yloc>
+      <xloc>704</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -243,131 +224,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>448</xloc>
-      <yloc>128</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Filter&#x3a; Vest. por Exp.</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to/>
-<send_false_to/>
-    <compare>
-<condition>
- <negated>N</negated>
- <leftvalue>por_experiencia</leftvalue>
- <function>&#x3d;</function>
- <rightvalue/>
- <value><name>constant</name><type>String</type><text>N</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>320</xloc>
-      <yloc>128</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Fix&#x3a; id_sexo</name>
-    <type>StringOperations</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <in_stream_name>id_sexo</in_stream_name>
-        <out_stream_name/>
-        <trim_type>none</trim_type>
-        <lower_upper>upper</lower_upper>
-        <padding_type>none</padding_type>
-        <pad_char/>
-        <pad_len/>
-        <init_cap>no</init_cap>
-        <mask_xml>none</mask_xml>
-        <digits>none</digits>
-        <remove_special_characters>none</remove_special_characters>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>624</xloc>
-      <yloc>240</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>If&#x3a; pre_vestibular</name>
-    <type>ValueMapper</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <field_to_use>10</field_to_use>
-    <target_field>preVestibular</target_field>
-    <non_match_default>Cursou pr&#xe9;-vestibular</non_match_default>
-    <fields>
-      <field>
-        <source_value>1</source_value>
-        <target_value>N&#xe3;o cursou pr&#xe9;-vestibular</target_value>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>848</xloc>
-      <yloc>128</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>If&#x3a; trabalha</name>
-    <type>ValueMapper</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <field_to_use>23</field_to_use>
-    <target_field>trabalha</target_field>
-    <non_match_default>Trabalha</non_match_default>
-    <fields>
-      <field>
-        <source_value>7</source_value>
-        <target_value>N&#xe3;o trabalha</target_value>
-      </field>
-      <field>
-        <source_value>8</source_value>
-        <target_value>N&#xe3;o trabalha</target_value>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>720</xloc>
-      <yloc>128</yloc>
+      <xloc>272</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -384,7 +242,7 @@
            <schema_name/>
            </partitioning>
     <connection>DB_VESTIBULAR</connection>
-    <sql>SELECT&#xa;  id_evento,&#xa;  id_candidato,&#xa;  sexo AS id_sexo,&#xa;  raca AS id_raca,&#xa;  grade_socioeconomico,&#xa;  data_nascimento,&#xa;  por_experiencia&#xa;FROM candidato</sql>
+    <sql>SELECT&#xd;&#xa;  	id_evento,&#xd;&#xa;  	id_candidato,&#xd;&#xa;  	grade_socioeconomico,&#xd;&#xa;  	data_nascimento,&#xd;&#xa;	&#x28;SELECT TIMESTAMPDIFF&#x28; YEAR, data_nascimento, CURDATE&#x28;&#x29;&#x29;&#x29; AS idade&#xd;&#xa;FROM candidato &#xd;&#xa;WHERE por_experiencia &#x3d; &#x27;N&#x27;&#x3b;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -392,102 +250,14 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>144</xloc>
-      <yloc>128</yloc>
+      <xloc>96</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Load&#x3a; renda_familiar</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection/>
-    <sql>SELECT&#xa;  id_codigo,&#xa;  descricao_codigo&#xa;FROM codigo_questionario&#xa;WHERE numero_questao &#x3d; 17&#xa;  AND id_evento &#x3d; 28</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>320</xloc>
-      <yloc>240</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Load&#x3a; sexo</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection/>
-    <sql>SELECT&#xa;  id_sexo,&#xa;  nome_sexo&#xa;FROM sexo&#xa;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>464</xloc>
-      <yloc>240</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Lookup&#x3a; renda</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <from>Load&#x3a; renda_familiar</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>Y</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>17</name>
-        <field>id_codigo</field>
-      </key>
-      <value>
-        <name>descricao_codigo</name>
-        <rename>rendaFamiliar</rename>
-        <default/>
-        <type>String</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>320</xloc>
-      <yloc>352</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Out&#x3a; dm_candidato2</name>
+    <name>Out&#x3a; socioecn1</name>
     <type>ExcelOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -503,10 +273,10 @@
     <append>N</append>
     <add_to_result_filenames>Y</add_to_result_filenames>
     <file>
-      <name>C&#x3a;&#x5c;Users&#x5c;emerson&#x5c;Desktop&#x5c;ENTREGA_DW&#x5c;kettle&#x5c;output&#x5c;dm_candidato</name>
+      <name>C&#x3a;&#x5c;Users&#x5c;emerson&#x5c;Desktop&#x5c;20152dw&#x5c;kettle&#x5c;output&#x5c;xls&#x5c;socioecn1.xls</name>
       <extention>xls</extention>
       <do_not_open_newfile_init>N</do_not_open_newfile_init>
-      <create_parent_folder>Y</create_parent_folder>
+      <create_parent_folder>N</create_parent_folder>
       <split>N</split>
       <add_date>N</add_date>
       <add_time>N</add_time>
@@ -547,75 +317,8 @@
       </custom>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>992</xloc>
-      <yloc>464</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Output&#x3a; dm_candidato1</name>
-    <type>ExcelOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <header>Y</header>
-    <footer>N</footer>
-    <encoding/>
-    <append>N</append>
-    <add_to_result_filenames>Y</add_to_result_filenames>
-    <file>
-      <name>C&#x3a;&#x5c;Users&#x5c;emerson&#x5c;Desktop&#x5c;ENTREGA_DW&#x5c;kettle&#x5c;output&#x5c;xls&#x5c;dm_candidato</name>
-      <extention>xls</extention>
-      <do_not_open_newfile_init>N</do_not_open_newfile_init>
-      <create_parent_folder>Y</create_parent_folder>
-      <split>N</split>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <sheetname>Sheet1</sheetname>
-      <autosizecolums>N</autosizecolums>
-      <nullisblank>N</nullisblank>
-      <protect_sheet>N</protect_sheet>
-      <password>Encrypted </password>
-      <splitevery>0</splitevery>
-      <usetempfiles>N</usetempfiles>
-      <tempdirectory/>
-      </file>
-    <template>
-      <enabled>N</enabled>
-      <append>N</append>
-      <filename>template.xls</filename>
-    </template>
-    <fields>
-    </fields>
-    <custom>
-    <header_font_name>arial</header_font_name>
-    <header_font_size>10</header_font_size>
-    <header_font_bold>N</header_font_bold>
-    <header_font_italic>N</header_font_italic>
-    <header_font_underline>no</header_font_underline>
-    <header_font_orientation>horizontal</header_font_orientation>
-    <header_font_color>black</header_font_color>
-    <header_background_color>none</header_background_color>
-    <header_row_height>255</header_row_height>
-    <header_alignment>left</header_alignment>
-    <header_image/>
-    <row_font_name>arial</row_font_name>
-    <row_font_size>10</row_font_size>
-    <row_font_color>black</row_font_color>
-    <row_background_color>none</row_background_color>
-      </custom>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>320</xloc>
-      <yloc>576</yloc>
+      <xloc>272</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -631,39 +334,23 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <fields>      <field>        <name>seq_candidato</name>
-        <rename/>
+    <fields>      <field>        <name>renda</name>
+        <rename>renda_familiar</rename>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>id_candidato</name>
-        <rename>cod_candidato</rename>
+      </field>      <field>        <name>faixa_etaria</name>
+        <rename>faixa_etaria</rename>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>opcao</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>sexo</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>trabalha</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>preVestibular</name>
-        <rename>pre_vest</rename>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>idade</name>
-        <rename/>
+      </field>      <field>        <name>seq_socioeconomico</name>
+        <rename>seq_socioeconomico</rename>
         <length>-2</length>
         <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>848</xloc>
-      <yloc>464</yloc>
+      <xloc>272</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -681,7 +368,7 @@
            </partitioning>
     <fields>        <select_unspecified>N</select_unspecified>
       <meta>        <name>10</name>
-        <rename>10</rename>
+        <rename>cursou_prev</rename>
         <type>Integer</type>
         <length>1</length>
         <precision>-2</precision>
@@ -696,7 +383,7 @@
         <currency_symbol/>
         <storage_type/>
       </meta>      <meta>        <name>17</name>
-        <rename>17</rename>
+        <rename>renda</rename>
         <type>Integer</type>
         <length>1</length>
         <precision>-2</precision>
@@ -711,7 +398,7 @@
         <currency_symbol/>
         <storage_type/>
       </meta>      <meta>        <name>23</name>
-        <rename>23</rename>
+        <rename>trabalha</rename>
         <type>Integer</type>
         <length>1</length>
         <precision>-2</precision>
@@ -727,8 +414,8 @@
         <storage_type/>
       </meta>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>576</xloc>
-      <yloc>128</yloc>
+      <xloc>448</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -744,9 +431,9 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection/>
+    <connection>DB_DW</connection>
     <schema/>
-    <table>dm_candidato</table>
+    <table>dm_socioeconomico</table>
     <commit>999999999</commit>
     <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>
@@ -765,14 +452,44 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>720</xloc>
-      <yloc>592</yloc>
+      <xloc>448</xloc>
+      <yloc>496</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Seq&#x3a; candidato</name>
+    <name>Script&#x3a; faixa_etaria</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var faixa_etaria &#x3d; &#x28;&#xd;&#xa;	idade &#x3c; 18 &#x3f; &#x27;adolescente&#x27; &#x3a; &#x28;&#xd;&#xa;		idade &#x3e; 18 &#x26;&#x26; idade &#x3c; 60 &#x3f; &#x27;adulto&#x27; &#x3a; &#x27;terceiraidade&#x27;&#xd;&#xa;	&#x29;&#xd;&#xa;&#x29;&#x3b;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>faixa_etaria</name>
+        <rename>faixa_etaria</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>704</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Seq&#x3a; socioeconomico</name>
     <type>Sequence</type>
     <description/>
     <distribute>Y</distribute>
@@ -782,7 +499,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-      <valuename>seq_candidato</valuename>
+      <valuename>seq_socioeconomico</valuename>
       <use_database>N</use_database>
       <connection/>
       <schema/>
@@ -794,8 +511,8 @@
       <max_value>999999999</max_value>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>624</xloc>
-      <yloc>464</yloc>
+      <xloc>448</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -819,40 +536,8 @@
       </steps>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>848</xloc>
-      <yloc>592</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Clear&#x3a; dm_socioeconomico</name>
-    <type>ExecSQL</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>DB_DW</connection>
-    <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>N</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>DELETE&#xd;&#xa;FROM&#xd;&#xa;	dm_socioeconomico&#x3b;</sql>
-    <set_params>N</set_params>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-    </arguments>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>80</xloc>
-      <yloc>16</yloc>
+      <xloc>272</xloc>
+      <yloc>496</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

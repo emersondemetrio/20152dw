@@ -61,8 +61,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>32</xloc>
-      <yloc>128</yloc>
+      <xloc>64</xloc>
+      <yloc>32</yloc>
       </entry>
     <entry>
       <name>dm_evento</name>
@@ -94,7 +94,7 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>176</xloc>
+      <xloc>224</xloc>
       <yloc>32</yloc>
       </entry>
     <entry>
@@ -104,8 +104,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>896</xloc>
-      <yloc>144</yloc>
+      <xloc>64</xloc>
+      <yloc>160</yloc>
       </entry>
     <entry>
       <name>dm_candidato</name>
@@ -137,8 +137,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>448</xloc>
-      <yloc>32</yloc>
+      <xloc>544</xloc>
+      <yloc>160</yloc>
       </entry>
     <entry>
       <name>dm_curso</name>
@@ -170,7 +170,7 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>304</xloc>
+      <xloc>368</xloc>
       <yloc>32</yloc>
       </entry>
     <entry>
@@ -203,8 +203,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>1</nr>
-      <xloc>176</xloc>
-      <yloc>240</yloc>
+      <xloc>544</xloc>
+      <yloc>32</yloc>
       </entry>
     <entry>
       <name>dm_socioeconomico</name>
@@ -236,28 +236,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>592</xloc>
-      <yloc>240</yloc>
-      </entry>
-    <entry>
-      <name>DUMMY</name>
-      <description/>
-      <type>SPECIAL</type>
-      <start>N</start>
-      <dummy>Y</dummy>
-      <repeat>N</repeat>
-      <schedulerType>0</schedulerType>
-      <intervalSeconds>0</intervalSeconds>
-      <intervalMinutes>60</intervalMinutes>
-      <hour>12</hour>
-      <minutes>0</minutes>
-      <weekDay>1</weekDay>
-      <DayOfMonth>1</DayOfMonth>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>704</xloc>
-      <yloc>144</yloc>
+      <xloc>368</xloc>
+      <yloc>160</yloc>
       </entry>
     <entry>
       <name>ft_desempenho</name>
@@ -289,8 +269,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>592</xloc>
-      <yloc>32</yloc>
+      <xloc>224</xloc>
+      <yloc>160</yloc>
       </entry>
   </entries>
   <hops>
@@ -314,43 +294,16 @@
     </hop>
     <hop>
       <from>dm_curso</from>
-      <to>dm_candidato</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>START</from>
       <to>dm_regiao</to>
       <from_nr>0</from_nr>
       <to_nr>1</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>dm_socioeconomico</from>
-      <to>DUMMY</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>DUMMY</from>
-      <to>Success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
       <from>dm_regiao</from>
-      <to>dm_socioeconomico</to>
+      <to>dm_candidato</to>
       <from_nr>1</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -359,6 +312,15 @@
     </hop>
     <hop>
       <from>dm_candidato</from>
+      <to>dm_socioeconomico</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>dm_socioeconomico</from>
       <to>ft_desempenho</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -368,7 +330,7 @@
     </hop>
     <hop>
       <from>ft_desempenho</from>
-      <to>DUMMY</to>
+      <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -379,8 +341,8 @@
   <notepads>
     <notepad>
       <note>Conex&#xf5;es&#x3a;&#xd;&#xa;&#xd;&#xa;&#x2f;vestibular 	- Dados &#x22;brutos&#x22;&#xd;&#xa;&#x2f;dwtf_db	- Data Wharehouse&#xd;&#xa;&#xd;&#xa;Dimens&#xf5;es&#x3a;&#xd;&#xa;&#xd;&#xa;- dm_evento&#x3a; Dados sobre o evento &#x22;Vestibular&#x22; &#x28; 2010 &#x7e; 2012 &#x29;&#xd;&#xa;- dm_curso&#x3a; Dados sobre os cursos de interesse &#x28;  F&#xed;sica, Qu&#xed;mica, Eng... &#x29;&#xd;&#xa;- dm_candidato&#x3a; Dados sobre candidatos&#xd;&#xa;- dm_regiao&#x3a; Dados geogr&#xe1;ficos&#xd;&#xa;- dm_socioeconomico&#x3a; Dados socioecn dos candidatos &#x28;algumas ja estao na dm_candidato&#x29;&#xd;&#xa;&#xd;&#xa;Fatos&#x3a;&#xd;&#xa;&#xd;&#xa;- ft_desempenho&#x3a; Dados sobre desempenho individual</note>
-      <xloc>32</xloc>
-      <yloc>336</yloc>
+      <xloc>64</xloc>
+      <yloc>272</yloc>
       <width>495</width>
       <heigth>261</heigth>
       <fontname>Segoe UI</fontname>

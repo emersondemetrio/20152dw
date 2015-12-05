@@ -130,160 +130,30 @@
     </attributes>
   </connection>
   <order>
+  <hop> <from>Load&#x3a; candidados</from><to>Filter&#x3a; Vest. por Exp.</to><enabled>Y</enabled> </hop>
+  <hop> <from>Filter&#x3a; Vest. por Exp.</from><to>Edit&#x3a; socioecn</to><enabled>Y</enabled> </hop>
   <hop> <from>Calc&#x3a; idade</from><to>Lookup&#x3a; sexo</to><enabled>Y</enabled> </hop>
   <hop> <from>END_TRANS</from><to>Output&#x3a; dm_candidato1</to><enabled>Y</enabled> </hop>
   <hop> <from>END_TRANS</from><to>Seq&#x3a; candidato</to><enabled>Y</enabled> </hop>
   <hop> <from>Lookup&#x3a; eventos</from><to>Calc&#x3a; idade</to><enabled>Y</enabled> </hop>
   <hop> <from>Fix&#x3a; id_sexo</from><to>Lookup&#x3a; sexo</to><enabled>Y</enabled> </hop>
-  <hop> <from>Load&#x3a; candidados</from><to>Filter&#x3a; Vest. por Exp.</to><enabled>Y</enabled> </hop>
   <hop> <from>Load&#x3a; eventos</from><to>Lookup&#x3a; eventos</to><enabled>Y</enabled> </hop>
   <hop> <from>Load&#x3a; renda_familiar</from><to>Lookup&#x3a; renda</to><enabled>Y</enabled> </hop>
   <hop> <from>Load&#x3a; sexo</from><to>Fix&#x3a; id_sexo</to><enabled>Y</enabled> </hop>
   <hop> <from>Prep&#x3a; de_para</from><to>Wait delete</to><enabled>Y</enabled> </hop>
-  <hop> <from>Filter&#x3a; Vest. por Exp.</from><to>Edit&#x3a; socioecn</to><enabled>Y</enabled> </hop>
   <hop> <from>Seq&#x3a; candidato</from><to>Prep&#x3a; de_para</to><enabled>Y</enabled> </hop>
   <hop> <from>Lookup&#x3a; sexo</from><to>Lookup&#x3a; renda</to><enabled>Y</enabled> </hop>
   <hop> <from>Edit&#x3a; socioecn</from><to>Prep&#x3a; socioecn_p_numerico</to><enabled>Y</enabled> </hop>
-  <hop> <from>Prep&#x3a; socioecn_p_numerico</from><to>If&#x3a; trabalha</to><enabled>Y</enabled> </hop>
-  <hop> <from>If&#x3a; trabalha</from><to>If&#x3a; pre_vestibular</to><enabled>Y</enabled> </hop>
+  <hop> <from>Prep&#x3a; socioecn_p_numerico</from><to>Map&#x3a; trabalha</to><enabled>Y</enabled> </hop>
+  <hop> <from>Map&#x3a; trabalha</from><to>Map&#x3a; pre_vestibular</to><enabled>Y</enabled> </hop>
   <hop> <from>Wait delete</from><to>SALVAR DM</to><enabled>Y</enabled> </hop>
   <hop> <from>Load&#x3a; opcao_vestibular</from><to>Lookup&#x3a; opcao_vestibular</to><enabled>Y</enabled> </hop>
   <hop> <from>Lookup&#x3a; renda</from><to>Lookup&#x3a; opcao_vestibular</to><enabled>Y</enabled> </hop>
   <hop> <from>Prep&#x3a; de_para</from><to>Out&#x3a; dm_candidato2</to><enabled>N</enabled> </hop>
   <hop> <from>Lookup&#x3a; opcao_vestibular</from><to>Filter&#x3a; opcao_null</to><enabled>Y</enabled> </hop>
   <hop> <from>Filter&#x3a; opcao_null</from><to>END_TRANS</to><enabled>Y</enabled> </hop>
-  <hop> <from>If&#x3a; pre_vestibular</from><to>Lookup&#x3a; eventos</to><enabled>Y</enabled> </hop>
+  <hop> <from>Map&#x3a; pre_vestibular</from><to>Lookup&#x3a; eventos</to><enabled>Y</enabled> </hop>
   </order>
-  <step>
-    <name>Load&#x3a; candidados</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>DB_VESTIBULAR</connection>
-    <sql>SELECT&#xa;  id_evento,&#xa;  id_candidato,&#xa;  sexo AS id_sexo,&#xa;  raca AS id_raca,&#xa;  grade_socioeconomico,&#xa;  data_nascimento,&#xa;  por_experiencia&#xa;FROM candidato</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>160</xloc>
-      <yloc>64</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Load&#x3a; eventos</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>DB_VESTIBULAR</connection>
-    <sql>SELECT&#xa;  id_evento,&#xa;  ano_evento&#xa;FROM evento&#xa;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1008</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Load&#x3a; opcao_vestibular</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>DB_VESTIBULAR</connection>
-    <sql>SELECT&#xd;&#xa;	c.id_curso,&#xd;&#xa;	c.nome_curso,&#xd;&#xa;	op.id_candidato,&#xd;&#xa;	op.codigo_opcao,&#xd;&#xa;	op.id_opcao,&#xd;&#xa;	e.ano_evento&#xd;&#xa;FROM&#xd;&#xa;	opcao_candidato op&#xd;&#xa;JOIN curso c ON op.codigo_opcao &#x3d; c.id_curso&#xd;&#xa;JOIN evento e ON op.id_evento &#x3d; e.id_evento&#xd;&#xa;WHERE&#xd;&#xa;	op.opcao_invalida &#x3c;&#x3e; &#x27;S&#x27;&#xd;&#xa;AND e.ano_evento IN &#x28;2009, 2010, 2011&#x29;&#xd;&#xa;AND &#x28;&#xd;&#xa;	c.nome_curso LIKE &#x27;&#x25;fisica&#x25;&#x27;&#xd;&#xa;	OR c.nome_curso LIKE &#x27;&#x25;f&#xed;sica&#x25;&#x27;&#xd;&#xa;	OR c.nome_curso LIKE &#x27;&#x25;quimica&#x25;&#x27;&#xd;&#xa;	OR c.nome_curso LIKE &#x27;&#x25;qu&#xed;mica&#x25;&#x27;&#xd;&#xa;	OR c.nome_curso LIKE &#x27;&#x25;ingles&#x25;&#x27;&#xd;&#xa;&#x29;&#xd;&#xa;AND c.nome_curso NOT LIKE &#x27;&#x25;educa&#xe7;&#xe3;o&#x25;&#x27;&#xd;&#xa;AND op.id_opcao IS NOT NULL</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>160</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Load&#x3a; renda_familiar</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>DB_VESTIBULAR</connection>
-    <sql>SELECT&#xa;  id_codigo,&#xa;  descricao_codigo&#xa;FROM codigo_questionario&#xa;WHERE numero_questao &#x3d; 17&#xa;  AND id_evento &#x3d; 28</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>336</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Load&#x3a; sexo</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>DB_VESTIBULAR</connection>
-    <sql>SELECT&#xa;  id_sexo,&#xa;  nome_sexo&#xa;FROM sexo&#xa;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>480</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
   <step>
     <name>Calc&#x3a; idade</name>
     <type>Calculator</type>
@@ -326,7 +196,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>864</xloc>
-      <yloc>288</yloc>
+      <yloc>240</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -377,7 +247,268 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>336</xloc>
-      <yloc>400</yloc>
+      <yloc>352</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Edit&#x3a; socioecn</name>
+    <type>StringCut</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>grade_socioeconomico</in_stream_name>
+        <out_stream_name>10</out_stream_name>
+        <cut_from>12</cut_from>
+        <cut_to>13</cut_to>
+      </field>
+      <field>
+        <in_stream_name>grade_socioeconomico</in_stream_name>
+        <out_stream_name>17</out_stream_name>
+        <cut_from>19</cut_from>
+        <cut_to>20</cut_to>
+      </field>
+      <field>
+        <in_stream_name>grade_socioeconomico</in_stream_name>
+        <out_stream_name>23</out_stream_name>
+        <cut_from>25</cut_from>
+        <cut_to>26</cut_to>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>464</xloc>
+      <yloc>16</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Filter&#x3a; Vest. por Exp.</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to/>
+<send_false_to/>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>por_experiencia</leftvalue>
+ <function>&#x3d;</function>
+ <rightvalue/>
+ <value><name>constant</name><type>String</type><text>N</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>336</xloc>
+      <yloc>16</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Filter&#x3a; opcao_null</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>END_TRANS</send_true_to>
+<send_false_to/>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>opcao</leftvalue>
+ <function>IS NOT NULL</function>
+ <rightvalue/>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>160</xloc>
+      <yloc>352</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Fix&#x3a; id_sexo</name>
+    <type>StringOperations</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>id_sexo</in_stream_name>
+        <out_stream_name/>
+        <trim_type>none</trim_type>
+        <lower_upper>upper</lower_upper>
+        <padding_type>none</padding_type>
+        <pad_char/>
+        <pad_len/>
+        <init_cap>no</init_cap>
+        <mask_xml>none</mask_xml>
+        <digits>none</digits>
+        <remove_special_characters>none</remove_special_characters>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>640</xloc>
+      <yloc>128</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Load&#x3a; candidados</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>DB_VESTIBULAR</connection>
+    <sql>SELECT&#xa;  id_evento,&#xa;  id_candidato,&#xa;  sexo AS id_sexo,&#xa;  raca AS id_raca,&#xa;  grade_socioeconomico,&#xa;  data_nascimento,&#xa;  por_experiencia&#xa;FROM candidato</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>160</xloc>
+      <yloc>16</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Load&#x3a; eventos</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>DB_VESTIBULAR</connection>
+    <sql>SELECT&#xa;  id_evento,&#xa;  ano_evento&#xa;FROM evento&#xa;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1008</xloc>
+      <yloc>128</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Load&#x3a; opcao_vestibular</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>DB_VESTIBULAR</connection>
+    <sql>SELECT&#xd;&#xa;	c.id_curso,&#xd;&#xa;	c.nome_curso,&#xd;&#xa;	op.id_candidato,&#xd;&#xa;	op.codigo_opcao,&#xd;&#xa;	op.id_opcao,&#xd;&#xa;	e.ano_evento&#xd;&#xa;FROM&#xd;&#xa;	opcao_candidato op&#xd;&#xa;JOIN curso c ON op.codigo_opcao &#x3d; c.id_curso&#xd;&#xa;JOIN evento e ON op.id_evento &#x3d; e.id_evento&#xd;&#xa;WHERE&#xd;&#xa;	op.opcao_invalida &#x3c;&#x3e; &#x27;S&#x27;&#xd;&#xa;AND e.ano_evento IN &#x28;2009, 2010, 2011&#x29;&#xd;&#xa;AND &#x28;&#xd;&#xa;	c.nome_curso LIKE &#x27;&#x25;fisica&#x25;&#x27;&#xd;&#xa;	OR c.nome_curso LIKE &#x27;&#x25;f&#xed;sica&#x25;&#x27;&#xd;&#xa;	OR c.nome_curso LIKE &#x27;&#x25;quimica&#x25;&#x27;&#xd;&#xa;	OR c.nome_curso LIKE &#x27;&#x25;qu&#xed;mica&#x25;&#x27;&#xd;&#xa;	OR c.nome_curso LIKE &#x27;&#x25;ingles&#x25;&#x27;&#xd;&#xa;&#x29;&#xd;&#xa;AND c.nome_curso NOT LIKE &#x27;&#x25;educa&#xe7;&#xe3;o&#x25;&#x27;&#xd;&#xa;AND op.id_opcao IS NOT NULL</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>160</xloc>
+      <yloc>128</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Load&#x3a; renda_familiar</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>DB_VESTIBULAR</connection>
+    <sql>SELECT&#xa;  id_codigo,&#xa;  descricao_codigo&#xa;FROM codigo_questionario&#xa;WHERE numero_questao &#x3d; 17&#xa;  AND id_evento &#x3d; 28</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>336</xloc>
+      <yloc>128</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Load&#x3a; sexo</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>DB_VESTIBULAR</connection>
+    <sql>SELECT&#xa;  id_sexo,&#xa;  nome_sexo&#xa;FROM sexo&#xa;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>480</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -413,14 +544,14 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>864</xloc>
-      <yloc>176</yloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Output&#x3a; dm_candidato1</name>
-    <type>ExcelOutput</type>
+    <name>Lookup&#x3a; opcao_vestibular</name>
+    <type>StreamLookup</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -429,58 +560,159 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <header>Y</header>
-    <footer>N</footer>
-    <encoding/>
-    <append>N</append>
-    <add_to_result_filenames>Y</add_to_result_filenames>
-    <file>
-      <name>C&#x3a;&#x5c;Users&#x5c;emerson&#x5c;Desktop&#x5c;ENTREGA_DW&#x5c;kettle&#x5c;output&#x5c;xls&#x5c;dm_candidato</name>
-      <extention>xls</extention>
-      <do_not_open_newfile_init>N</do_not_open_newfile_init>
-      <create_parent_folder>Y</create_parent_folder>
-      <split>N</split>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <sheetname>Sheet1</sheetname>
-      <autosizecolums>N</autosizecolums>
-      <nullisblank>N</nullisblank>
-      <protect_sheet>N</protect_sheet>
-      <password>Encrypted </password>
-      <splitevery>0</splitevery>
-      <usetempfiles>N</usetempfiles>
-      <tempdirectory/>
-      </file>
-    <template>
-      <enabled>N</enabled>
-      <append>N</append>
-      <filename>template.xls</filename>
-    </template>
-    <fields>
-    </fields>
-    <custom>
-    <header_font_name>arial</header_font_name>
-    <header_font_size>10</header_font_size>
-    <header_font_bold>N</header_font_bold>
-    <header_font_italic>N</header_font_italic>
-    <header_font_underline>no</header_font_underline>
-    <header_font_orientation>horizontal</header_font_orientation>
-    <header_font_color>black</header_font_color>
-    <header_background_color>none</header_background_color>
-    <header_row_height>255</header_row_height>
-    <header_alignment>left</header_alignment>
-    <header_image/>
-    <row_font_name>arial</row_font_name>
-    <row_font_size>10</row_font_size>
-    <row_font_color>black</row_font_color>
-    <row_background_color>none</row_background_color>
-      </custom>
+    <from>Load&#x3a; opcao_vestibular</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>id_candidato</name>
+        <field>id_candidato</field>
+      </key>
+      <value>
+        <name>id_opcao</name>
+        <rename>opcao</rename>
+        <default/>
+        <type>String</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>160</xloc>
+      <yloc>240</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Lookup&#x3a; renda</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <from>Load&#x3a; renda_familiar</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>17</name>
+        <field>id_codigo</field>
+      </key>
+      <value>
+        <name>descricao_codigo</name>
+        <rename>rendaFamiliar</rename>
+        <default/>
+        <type>String</type>
+      </value>
+    </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>336</xloc>
-      <yloc>512</yloc>
+      <yloc>240</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Lookup&#x3a; sexo</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <from>Fix&#x3a; id_sexo</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>id_sexo</name>
+        <field>id_sexo</field>
+      </key>
+      <value>
+        <name>nome_sexo</name>
+        <rename>sexo</rename>
+        <default>m</default>
+        <type>String</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>640</xloc>
+      <yloc>240</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Map&#x3a; pre_vestibular</name>
+    <type>ValueMapper</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <field_to_use>10</field_to_use>
+    <target_field>preVestibular</target_field>
+    <non_match_default>Cursou pr&#xe9;-vestibular</non_match_default>
+    <fields>
+      <field>
+        <source_value>1</source_value>
+        <target_value>N&#xe3;o cursou pr&#xe9;-vestibular</target_value>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>864</xloc>
+      <yloc>16</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Map&#x3a; trabalha</name>
+    <type>ValueMapper</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <field_to_use>23</field_to_use>
+    <target_field>trabalha</target_field>
+    <non_match_default>Trabalha</non_match_default>
+    <fields>
+      <field>
+        <source_value>7</source_value>
+        <target_value>N&#xe3;o trabalha</target_value>
+      </field>
+      <field>
+        <source_value>8</source_value>
+        <target_value>N&#xe3;o trabalha</target_value>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>736</xloc>
+      <yloc>16</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -547,14 +779,14 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1008</xloc>
-      <yloc>400</yloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Filter&#x3a; opcao_null</name>
-    <type>FilterRows</type>
+    <name>Output&#x3a; dm_candidato1</name>
+    <type>ExcelOutput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -563,119 +795,58 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<send_true_to>END_TRANS</send_true_to>
-<send_false_to/>
-    <compare>
-<condition>
- <negated>N</negated>
- <leftvalue>opcao</leftvalue>
- <function>IS NOT NULL</function>
- <rightvalue/>
- </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>160</xloc>
-      <yloc>400</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Filter&#x3a; Vest. por Exp.</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to/>
-<send_false_to/>
-    <compare>
-<condition>
- <negated>N</negated>
- <leftvalue>por_experiencia</leftvalue>
- <function>&#x3d;</function>
- <rightvalue/>
- <value><name>constant</name><type>String</type><text>N</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
-    </compare>
+    <header>Y</header>
+    <footer>N</footer>
+    <encoding/>
+    <append>N</append>
+    <add_to_result_filenames>Y</add_to_result_filenames>
+    <file>
+      <name>C&#x3a;&#x5c;Users&#x5c;emerson&#x5c;Desktop&#x5c;ENTREGA_DW&#x5c;kettle&#x5c;output&#x5c;xls&#x5c;dm_candidato</name>
+      <extention>xls</extention>
+      <do_not_open_newfile_init>N</do_not_open_newfile_init>
+      <create_parent_folder>Y</create_parent_folder>
+      <split>N</split>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <sheetname>Sheet1</sheetname>
+      <autosizecolums>N</autosizecolums>
+      <nullisblank>N</nullisblank>
+      <protect_sheet>N</protect_sheet>
+      <password>Encrypted </password>
+      <splitevery>0</splitevery>
+      <usetempfiles>N</usetempfiles>
+      <tempdirectory/>
+      </file>
+    <template>
+      <enabled>N</enabled>
+      <append>N</append>
+      <filename>template.xls</filename>
+    </template>
+    <fields>
+    </fields>
+    <custom>
+    <header_font_name>arial</header_font_name>
+    <header_font_size>10</header_font_size>
+    <header_font_bold>N</header_font_bold>
+    <header_font_italic>N</header_font_italic>
+    <header_font_underline>no</header_font_underline>
+    <header_font_orientation>horizontal</header_font_orientation>
+    <header_font_color>black</header_font_color>
+    <header_background_color>none</header_background_color>
+    <header_row_height>255</header_row_height>
+    <header_alignment>left</header_alignment>
+    <header_image/>
+    <row_font_name>arial</row_font_name>
+    <row_font_size>10</row_font_size>
+    <row_font_color>black</row_font_color>
+    <row_background_color>none</row_background_color>
+      </custom>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>336</xloc>
-      <yloc>64</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Fix&#x3a; id_sexo</name>
-    <type>StringOperations</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <in_stream_name>id_sexo</in_stream_name>
-        <out_stream_name/>
-        <trim_type>none</trim_type>
-        <lower_upper>upper</lower_upper>
-        <padding_type>none</padding_type>
-        <pad_char/>
-        <pad_len/>
-        <init_cap>no</init_cap>
-        <mask_xml>none</mask_xml>
-        <digits>none</digits>
-        <remove_special_characters>none</remove_special_characters>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>640</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Lookup&#x3a; opcao_vestibular</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <from>Load&#x3a; opcao_vestibular</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>Y</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>id_candidato</name>
-        <field>id_candidato</field>
-      </key>
-      <value>
-        <name>id_opcao</name>
-        <rename>opcao</rename>
-        <default/>
-        <type>String</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>160</xloc>
-      <yloc>288</yloc>
+      <yloc>464</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -723,81 +894,7 @@
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>864</xloc>
-      <yloc>400</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Lookup&#x3a; renda</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <from>Load&#x3a; renda_familiar</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>Y</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>17</name>
-        <field>id_codigo</field>
-      </key>
-      <value>
-        <name>descricao_codigo</name>
-        <rename>rendaFamiliar</rename>
-        <default/>
-        <type>String</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>336</xloc>
-      <yloc>288</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>SALVAR DM</name>
-    <type>TableOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>DB_DW</connection>
-    <schema/>
-    <table>dm_candidato</table>
-    <commit>999999999</commit>
-    <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>N</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
-    <fields>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>736</xloc>
-      <yloc>528</yloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -862,7 +959,45 @@
       </meta>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>592</xloc>
-      <yloc>64</yloc>
+      <yloc>16</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>SALVAR DM</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>DB_DW</connection>
+    <schema/>
+    <table>dm_candidato</table>
+    <commit>999999999</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>N</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>736</xloc>
+      <yloc>480</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -891,142 +1026,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>640</xloc>
-      <yloc>400</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Lookup&#x3a; sexo</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <from>Fix&#x3a; id_sexo</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>Y</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>id_sexo</name>
-        <field>id_sexo</field>
-      </key>
-      <value>
-        <name>nome_sexo</name>
-        <rename>sexo</rename>
-        <default>m</default>
-        <type>String</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>640</xloc>
-      <yloc>288</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Edit&#x3a; socioecn</name>
-    <type>StringCut</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <in_stream_name>grade_socioeconomico</in_stream_name>
-        <out_stream_name>10</out_stream_name>
-        <cut_from>12</cut_from>
-        <cut_to>13</cut_to>
-      </field>
-      <field>
-        <in_stream_name>grade_socioeconomico</in_stream_name>
-        <out_stream_name>17</out_stream_name>
-        <cut_from>19</cut_from>
-        <cut_to>20</cut_to>
-      </field>
-      <field>
-        <in_stream_name>grade_socioeconomico</in_stream_name>
-        <out_stream_name>23</out_stream_name>
-        <cut_from>25</cut_from>
-        <cut_to>26</cut_to>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>464</xloc>
-      <yloc>64</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>If&#x3a; pre_vestibular</name>
-    <type>ValueMapper</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <field_to_use>10</field_to_use>
-    <target_field>preVestibular</target_field>
-    <non_match_default>Cursou pr&#xe9;-vestibular</non_match_default>
-    <fields>
-      <field>
-        <source_value>1</source_value>
-        <target_value>N&#xe3;o cursou pr&#xe9;-vestibular</target_value>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>864</xloc>
-      <yloc>64</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>If&#x3a; trabalha</name>
-    <type>ValueMapper</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <field_to_use>23</field_to_use>
-    <target_field>trabalha</target_field>
-    <non_match_default>Trabalha</non_match_default>
-    <fields>
-      <field>
-        <source_value>7</source_value>
-        <target_value>N&#xe3;o trabalha</target_value>
-      </field>
-      <field>
-        <source_value>8</source_value>
-        <target_value>N&#xe3;o trabalha</target_value>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>736</xloc>
-      <yloc>64</yloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1051,7 +1051,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>864</xloc>
-      <yloc>528</yloc>
+      <yloc>480</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
