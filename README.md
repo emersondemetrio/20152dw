@@ -1,5 +1,7 @@
-# 20152dw
+# Data Wharehouse - 20152dw
 
 Trabalho Final de Data Wharehouse - UFSC 20152
+
 Autor: Emerson Demetrio
-Versao: Entrega Final
+
+Versão: Entrega Final
