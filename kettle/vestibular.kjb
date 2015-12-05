@@ -207,12 +207,12 @@
       <yloc>240</yloc>
       </entry>
     <entry>
-      <name>socioeconomico</name>
+      <name>dm_socioeconomico</name>
       <description/>
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;dm_socioeconomico</filename>
+      <filename>C&#x3a;&#x5c;Users&#x5c;emerson&#x5c;Desktop&#x5c;20152dw&#x5c;kettle&#x5c;dm_socioeconomico.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -256,16 +256,16 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>736</xloc>
+      <xloc>704</xloc>
       <yloc>144</yloc>
       </entry>
     <entry>
-      <name>ft_desmpenho</name>
+      <name>ft_desempenho</name>
       <description/>
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;ft_desmpenho</filename>
+      <filename>C&#x3a;&#x5c;Users&#x5c;emerson&#x5c;Desktop&#x5c;20152dw&#x5c;kettle&#x5c;ft_desempenho.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -331,7 +331,7 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>socioeconomico</from>
+      <from>dm_socioeconomico</from>
       <to>DUMMY</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -350,7 +350,7 @@
     </hop>
     <hop>
       <from>dm_regiao</from>
-      <to>socioeconomico</to>
+      <to>dm_socioeconomico</to>
       <from_nr>1</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -359,7 +359,7 @@
     </hop>
     <hop>
       <from>dm_candidato</from>
-      <to>ft_desmpenho</to>
+      <to>ft_desempenho</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -367,7 +367,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>ft_desmpenho</from>
+      <from>ft_desempenho</from>
       <to>DUMMY</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
