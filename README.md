@@ -32,8 +32,16 @@ DB's utilizados:
 Observe que ao executar o "job", as restrições de integridade do bd serão ignoradas. 
 Cada passo removerá do DB_DW sua respectiva dm ou ft.
 
-Tableau: 
+# Tableau: 
 
 Inicie o Tableau
 
 Clique em uma das questoes/ resumos.
+
+Mysql
+Username: root
+Senha: sem senha
+
+Postgres (Spoon)
+User: ?
+Senha: 123
