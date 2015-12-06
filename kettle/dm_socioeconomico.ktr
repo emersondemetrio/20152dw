@@ -242,7 +242,7 @@
            <schema_name/>
            </partitioning>
     <connection>DB_VESTIBULAR</connection>
-    <sql>SELECT&#xd;&#xa;  	id_evento,&#xd;&#xa;  	id_candidato,&#xd;&#xa;  	grade_socioeconomico,&#xd;&#xa;  	data_nascimento,&#xd;&#xa;	&#x28;SELECT TIMESTAMPDIFF&#x28; YEAR, data_nascimento, CURDATE&#x28;&#x29;&#x29;&#x29; AS idade&#xd;&#xa;FROM candidato &#xd;&#xa;WHERE por_experiencia &#x3d; &#x27;N&#x27;&#x3b;</sql>
+    <sql>SELECT&#xd;&#xa;  	id_evento,&#xd;&#xa;  	id_candidato,&#xd;&#xa;  	grade_socioeconomico,&#xd;&#xa;  	data_nascimento,&#xd;&#xa;	&#x28;SELECT TIMESTAMPDIFF&#x28; YEAR, data_nascimento, CURDATE&#x28;&#x29;&#x29;&#x29; AS idade&#xd;&#xa;FROM candidato &#xd;&#xa;&#x23;WHERE por_experiencia &#x3d; &#x27;N&#x27;&#x3b;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -477,7 +477,7 @@
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var faixa_etaria &#x3d; &#x28;&#xd;&#xa;	idade &#x3c;&#x3d; 18 &#x3f; &#x27;adolescente&#x27; &#x3a; &#x28;&#xd;&#xa;		idade &#x3e; 18 &#x26;&#x26; idade &#x3c; 60 &#x3f; &#x27;adulto&#x27; &#x3a; &#x27;terceiraidade&#x27;&#xd;&#xa;	&#x29;&#xd;&#xa;&#x29;&#x3b;</jsScript_script>
+        <jsScript_script>function getFaixaEtaria&#x28; v &#x29;&#x7b;&#xd;&#xa;	var k &#x3d; parseInt&#x28;v&#x29;&#x3b;&#xd;&#xa;	var r &#x3d; &#x27;NA&#x27;&#x3b;&#xd;&#xa;&#xd;&#xa;	if&#x28; &#x21; isNaN&#x28; k &#x29; &#x29;&#x7b;		&#xd;&#xa;		if &#x28; k &#x3c;&#x3d; 18 &#x29;&#x7b;&#xd;&#xa;			r &#x3d; &#x27;Adolescente&#x27;&#x3b;&#xd;&#xa;		&#x7d;&#xd;&#xa;		&#xd;&#xa;		if &#x28;k &#x3e; 18 &#x26;&#x26; k &#x3c; 60&#x29; &#x7b;&#xd;&#xa;			r &#x3d; &#x27;Adulto&#x27;&#x3b;&#xd;&#xa;		&#x7d;&#xd;&#xa;&#xd;&#xa;		if&#x28; k &#x3e;&#x3d; 60&#x29;&#x7b;&#xd;&#xa;			r &#x3d; &#x27;Terceira Idade&#x27;&#x3b;&#xd;&#xa;		&#x7d;&#xd;&#xa;	&#x7d;&#xd;&#xa;	return r&#x3b;&#xd;&#xa;&#x7d;&#xd;&#xa;var faixa_etaria &#x3d; getFaixaEtaria&#x28; idade &#x29;&#x3b;&#xd;&#xa;</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>faixa_etaria</name>
         <rename>faixa_etaria</rename>
         <type>String</type>
