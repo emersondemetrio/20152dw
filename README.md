@@ -25,4 +25,15 @@ Ferramentas necessárias:
 
 Execução dos passos:
 
+DB's utilizados: 
+- BD_VESTIBULAR
+- DB_DW
+
 Observe que ao executar o "job", as restrições de integridade do bd serão ignoradas. 
+Cada passo removerá do DB_DW sua respectiva dm ou ft.
+
+Tableau: 
+
+Inicie o Tableau
+
+Clique em uma das questoes/ resumos.
