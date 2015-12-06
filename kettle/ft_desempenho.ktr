@@ -146,9 +146,10 @@
   <hop> <from>Lookup&#x3a; Regiao</from><to>Lookup&#x3a; socioeconomico</to><enabled>Y</enabled> </hop>
   <hop> <from>Candidato lookup</from><to>Lookup&#x3a; Curso </to><enabled>Y</enabled> </hop>
   <hop> <from>Lookup&#x3a; aprovado</from><to>Candidato lookup</to><enabled>Y</enabled> </hop>
-  <hop> <from>Lookup&#x3a; socioeconomico</from><to>Seq&#x3a; desempenho</to><enabled>Y</enabled> </hop>
   <hop> <from>Seq&#x3a; desempenho</from><to>Select &#x2f; Rename values</to><enabled>Y</enabled> </hop>
   <hop> <from>Select &#x2f; Rename values</from><to>Wait delete</to><enabled>Y</enabled> </hop>
+  <hop> <from>Lookup&#x3a; socioeconomico</from><to>Filter&#x3a; seq_not_null</to><enabled>Y</enabled> </hop>
+  <hop> <from>Filter&#x3a; seq_not_null</from><to>Seq&#x3a; desempenho</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add Column&#x3a; aprovado</name>
@@ -338,7 +339,7 @@
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>DELETE FROM ft_desempenho&#x3b;</sql>
+    <sql>SET FOREIGN_KEY_CHECKS &#x3d; 0&#x3b; &#xd;&#xa;&#xd;&#xa;TRUNCATE ft_desempenho&#x3b;&#xd;&#xa;&#xd;&#xa;SET FOREIGN_KEY_CHECKS &#x3d; 1&#x3b;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
@@ -350,6 +351,54 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>64</xloc>
       <yloc>16</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Filter&#x3a; seq_not_null</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Seq&#x3a; desempenho</send_true_to>
+<send_false_to/>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <conditions>
+  <condition>
+   <negated>N</negated>
+   <leftvalue>seq_candidato</leftvalue>
+   <function>IS NOT NULL</function>
+   <rightvalue/>
+   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>AND</operator>
+   <leftvalue>seq_curso</leftvalue>
+   <function>IS NOT NULL</function>
+   <rightvalue/>
+   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>AND</operator>
+   <leftvalue>seq_evento</leftvalue>
+   <function>IS NOT NULL</function>
+   <rightvalue/>
+   </condition>
+  </conditions>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>720</xloc>
+      <yloc>672</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -730,7 +779,7 @@
     <connection>DB_DW</connection>
     <schema/>
     <table>ft_desempenho</table>
-    <commit>99999</commit>
+    <commit>9999999</commit>
     <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>
     <use_batch>Y</use_batch>
@@ -749,7 +798,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>720</xloc>
-      <yloc>336</yloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -829,7 +878,7 @@
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>720</xloc>
-      <yloc>560</yloc>
+      <yloc>448</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -858,7 +907,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>720</xloc>
-      <yloc>672</yloc>
+      <yloc>560</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -983,7 +1032,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>720</xloc>
-      <yloc>416</yloc>
+      <yloc>304</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

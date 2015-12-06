@@ -1,0 +1,1 @@
+Drivers para windows: https://dev.mysql.com/downloads/connector/odbc/

@@ -156,7 +156,7 @@
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>DELETE&#xd;&#xa;FROM&#xd;&#xa;	dm_socioeconomico&#x3b;</sql>
+    <sql>SET FOREIGN_KEY_CHECKS &#x3d; 0&#x3b; &#xd;&#xa;&#xd;&#xa;TRUNCATE dm_socioeconomico&#x3b;&#xd;&#xa;&#xd;&#xa;SET FOREIGN_KEY_CHECKS &#x3d; 1&#x3b;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
@@ -477,7 +477,7 @@
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var faixa_etaria &#x3d; &#x28;&#xd;&#xa;	idade &#x3c; 18 &#x3f; &#x27;adolescente&#x27; &#x3a; &#x28;&#xd;&#xa;		idade &#x3e; 18 &#x26;&#x26; idade &#x3c; 60 &#x3f; &#x27;adulto&#x27; &#x3a; &#x27;terceiraidade&#x27;&#xd;&#xa;	&#x29;&#xd;&#xa;&#x29;&#x3b;</jsScript_script>
+        <jsScript_script>var faixa_etaria &#x3d; &#x28;&#xd;&#xa;	idade &#x3c;&#x3d; 18 &#x3f; &#x27;adolescente&#x27; &#x3a; &#x28;&#xd;&#xa;		idade &#x3e; 18 &#x26;&#x26; idade &#x3c; 60 &#x3f; &#x27;adulto&#x27; &#x3a; &#x27;terceiraidade&#x27;&#xd;&#xa;	&#x29;&#xd;&#xa;&#x29;&#x3b;</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>faixa_etaria</name>
         <rename>faixa_etaria</rename>
         <type>String</type>

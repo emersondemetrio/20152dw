@@ -147,7 +147,7 @@
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>DELETE&#xd;&#xa;FROM&#xd;&#xa;	dm_regiao&#x3b;</sql>
+    <sql>SET FOREIGN_KEY_CHECKS &#x3d; 0&#x3b; &#xd;&#xa;&#xd;&#xa;TRUNCATE dm_regiao&#x3b;&#xd;&#xa;&#xd;&#xa;SET FOREIGN_KEY_CHECKS &#x3d; 1&#x3b;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
