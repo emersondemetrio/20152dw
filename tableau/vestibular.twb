@@ -6,7 +6,823 @@
     <preference name='ui.encoding.shelf.height' value='24' />
     <preference name='ui.shelf.height' value='26' />
   </preferences>
-  <datasources />
+  <datasources>
+    <datasource caption='ft_desempenho+ (dwtf_db)' inline='true' name='mysql.42344.506582256945' version='9.1'>
+      <connection class='mysql' dbname='dwtf_db' odbc-native-protocol='yes' port='3306' server='127.0.0.1' source-charset='' username='root'>
+        <relation join='inner' type='join'>
+          <clause type='join'>
+            <expression op='='>
+              <expression op='[ft_desempenho].[seq_socioeconomico]' />
+              <expression op='[dm_socioeconomico].[seq_socioeconomico]' />
+            </expression>
+          </clause>
+          <relation join='inner' type='join'>
+            <clause type='join'>
+              <expression op='='>
+                <expression op='[ft_desempenho].[seq_regiao]' />
+                <expression op='[dm_regiao].[seq_regiao]' />
+              </expression>
+            </clause>
+            <relation join='inner' type='join'>
+              <clause type='join'>
+                <expression op='='>
+                  <expression op='[ft_desempenho].[seq_evento]' />
+                  <expression op='[dm_evento].[seq_evento]' />
+                </expression>
+              </clause>
+              <relation join='inner' type='join'>
+                <clause type='join'>
+                  <expression op='='>
+                    <expression op='[ft_desempenho].[seq_curso]' />
+                    <expression op='[dm_curso].[seq_curso]' />
+                  </expression>
+                </clause>
+                <relation join='inner' type='join'>
+                  <clause type='join'>
+                    <expression op='='>
+                      <expression op='[ft_desempenho].[seq_candidato]' />
+                      <expression op='[dm_candidato].[seq_candidato]' />
+                    </expression>
+                  </clause>
+                  <relation name='ft_desempenho' table='[ft_desempenho]' type='table' />
+                  <relation name='dm_candidato' table='[dm_candidato]' type='table' />
+                </relation>
+                <relation name='dm_curso' table='[dm_curso]' type='table' />
+              </relation>
+              <relation name='dm_evento' table='[dm_evento]' type='table' />
+            </relation>
+            <relation name='dm_regiao' table='[dm_regiao]' type='table' />
+          </relation>
+          <relation name='dm_socioeconomico' table='[dm_socioeconomico]' type='table' />
+        </relation>
+        <cols>
+          <map key='[ano]' value='[dm_evento].[ano]' />
+          <map key='[aprovado]' value='[ft_desempenho].[aprovado]' />
+          <map key='[bairro]' value='[dm_regiao].[bairro]' />
+          <map key='[centro]' value='[dm_curso].[centro]' />
+          <map key='[cidade]' value='[dm_regiao].[cidade]' />
+          <map key='[cod_candidato (dm_regiao)]' value='[dm_regiao].[cod_candidato]' />
+          <map key='[cod_candidato (dm_socioeconomico)]' value='[dm_socioeconomico].[cod_candidato]' />
+          <map key='[cod_candidato]' value='[dm_candidato].[cod_candidato]' />
+          <map key='[cod_curso]' value='[dm_curso].[cod_curso]' />
+          <map key='[cod_evento]' value='[dm_evento].[cod_evento]' />
+          <map key='[descricao]' value='[dm_evento].[descricao]' />
+          <map key='[estado]' value='[dm_regiao].[estado]' />
+          <map key='[faixa_etaria]' value='[dm_socioeconomico].[faixa_etaria]' />
+          <map key='[idade]' value='[dm_candidato].[idade]' />
+          <map key='[nome]' value='[dm_curso].[nome]' />
+          <map key='[nota_biologia]' value='[ft_desempenho].[nota_biologia]' />
+          <map key='[nota_fisica]' value='[ft_desempenho].[nota_fisica]' />
+          <map key='[nota_geral]' value='[ft_desempenho].[nota_geral]' />
+          <map key='[nota_lingua_estrangeira]' value='[ft_desempenho].[nota_lingua_estrangeira]' />
+          <map key='[nota_matematica]' value='[ft_desempenho].[nota_matematica]' />
+          <map key='[nota_quimica]' value='[ft_desempenho].[nota_quimica]' />
+          <map key='[opcao]' value='[dm_candidato].[opcao]' />
+          <map key='[pais]' value='[dm_regiao].[pais]' />
+          <map key='[pre_vest]' value='[dm_candidato].[pre_vest]' />
+          <map key='[renda_familiar]' value='[dm_socioeconomico].[renda_familiar]' />
+          <map key='[seq_candidato (dm_candidato)]' value='[dm_candidato].[seq_candidato]' />
+          <map key='[seq_candidato]' value='[ft_desempenho].[seq_candidato]' />
+          <map key='[seq_curso (dm_curso)]' value='[dm_curso].[seq_curso]' />
+          <map key='[seq_curso]' value='[ft_desempenho].[seq_curso]' />
+          <map key='[seq_desempenho]' value='[ft_desempenho].[seq_desempenho]' />
+          <map key='[seq_evento (dm_evento)]' value='[dm_evento].[seq_evento]' />
+          <map key='[seq_evento]' value='[ft_desempenho].[seq_evento]' />
+          <map key='[seq_regiao (dm_regiao)]' value='[dm_regiao].[seq_regiao]' />
+          <map key='[seq_regiao]' value='[ft_desempenho].[seq_regiao]' />
+          <map key='[seq_socioeconomico (dm_socioeconomico)]' value='[dm_socioeconomico].[seq_socioeconomico]' />
+          <map key='[seq_socioeconomico]' value='[ft_desempenho].[seq_socioeconomico]' />
+          <map key='[sexo]' value='[dm_candidato].[sexo]' />
+          <map key='[total_exatas]' value='[ft_desempenho].[total_exatas]' />
+          <map key='[total_humanas]' value='[ft_desempenho].[total_humanas]' />
+          <map key='[trabalha]' value='[dm_candidato].[trabalha]' />
+        </cols>
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>seq_desempenho</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[seq_desempenho]</local-name>
+            <parent-name>[ft_desempenho]</parent-name>
+            <remote-alias>seq_desempenho</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <contains-null>false</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_INTEGER&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SLONG&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>seq_evento</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[seq_evento]</local-name>
+            <parent-name>[ft_desempenho]</parent-name>
+            <remote-alias>seq_evento</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <contains-null>false</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_INTEGER&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SLONG&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>seq_curso</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[seq_curso]</local-name>
+            <parent-name>[ft_desempenho]</parent-name>
+            <remote-alias>seq_curso</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <contains-null>false</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_INTEGER&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SLONG&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>seq_candidato</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[seq_candidato]</local-name>
+            <parent-name>[ft_desempenho]</parent-name>
+            <remote-alias>seq_candidato</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <contains-null>false</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_INTEGER&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SLONG&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>seq_socioeconomico</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[seq_socioeconomico]</local-name>
+            <parent-name>[ft_desempenho]</parent-name>
+            <remote-alias>seq_socioeconomico</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <contains-null>false</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_INTEGER&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SLONG&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>seq_regiao</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[seq_regiao]</local-name>
+            <parent-name>[ft_desempenho]</parent-name>
+            <remote-alias>seq_regiao</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <contains-null>false</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_INTEGER&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SLONG&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>aprovado</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[aprovado]</local-name>
+            <parent-name>[ft_desempenho]</parent-name>
+            <remote-alias>aprovado</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_INTEGER&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SLONG&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>nota_geral</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[nota_geral]</local-name>
+            <parent-name>[ft_desempenho]</parent-name>
+            <remote-alias>nota_geral</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>5</precision>
+            <scale>2</scale>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DECIMAL&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_NUMERIC&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>total_exatas</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[total_exatas]</local-name>
+            <parent-name>[ft_desempenho]</parent-name>
+            <remote-alias>total_exatas</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DOUBLE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_DOUBLE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>total_humanas</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[total_humanas]</local-name>
+            <parent-name>[ft_desempenho]</parent-name>
+            <remote-alias>total_humanas</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DOUBLE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_DOUBLE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>nota_matematica</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[nota_matematica]</local-name>
+            <parent-name>[ft_desempenho]</parent-name>
+            <remote-alias>nota_matematica</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>5</precision>
+            <scale>2</scale>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DECIMAL&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_NUMERIC&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>nota_lingua_estrangeira</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[nota_lingua_estrangeira]</local-name>
+            <parent-name>[ft_desempenho]</parent-name>
+            <remote-alias>nota_lingua_estrangeira</remote-alias>
+            <ordinal>12</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>5</precision>
+            <scale>2</scale>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DECIMAL&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_NUMERIC&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>nota_fisica</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[nota_fisica]</local-name>
+            <parent-name>[ft_desempenho]</parent-name>
+            <remote-alias>nota_fisica</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>5</precision>
+            <scale>2</scale>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DECIMAL&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_NUMERIC&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>nota_quimica</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[nota_quimica]</local-name>
+            <parent-name>[ft_desempenho]</parent-name>
+            <remote-alias>nota_quimica</remote-alias>
+            <ordinal>14</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>5</precision>
+            <scale>2</scale>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DECIMAL&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_NUMERIC&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>nota_biologia</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[nota_biologia]</local-name>
+            <parent-name>[ft_desempenho]</parent-name>
+            <remote-alias>nota_biologia</remote-alias>
+            <ordinal>15</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>5</precision>
+            <scale>2</scale>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DECIMAL&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_NUMERIC&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>seq_candidato</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[seq_candidato (dm_candidato)]</local-name>
+            <parent-name>[dm_candidato]</parent-name>
+            <remote-alias>seq_candidato</remote-alias>
+            <ordinal>21</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <contains-null>false</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_INTEGER&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SLONG&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>cod_candidato</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[cod_candidato]</local-name>
+            <parent-name>[dm_candidato]</parent-name>
+            <remote-alias>cod_candidato</remote-alias>
+            <ordinal>22</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_INTEGER&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SLONG&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>opcao</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[opcao]</local-name>
+            <parent-name>[dm_candidato]</parent-name>
+            <remote-alias>opcao</remote-alias>
+            <ordinal>23</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>3</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation flag='0' name='LROOT' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>sexo</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[sexo]</local-name>
+            <parent-name>[dm_candidato]</parent-name>
+            <remote-alias>sexo</remote-alias>
+            <ordinal>24</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>9</width>
+            <contains-null>true</contains-null>
+            <padded-semantics>true</padded-semantics>
+            <collation flag='0' name='LROOT' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>trabalha</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[trabalha]</local-name>
+            <parent-name>[dm_candidato]</parent-name>
+            <remote-alias>trabalha</remote-alias>
+            <ordinal>25</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>12</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LROOT' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>pre_vest</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[pre_vest]</local-name>
+            <parent-name>[dm_candidato]</parent-name>
+            <remote-alias>pre_vest</remote-alias>
+            <ordinal>26</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>25</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LROOT' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>idade</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[idade]</local-name>
+            <parent-name>[dm_candidato]</parent-name>
+            <remote-alias>idade</remote-alias>
+            <ordinal>27</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_INTEGER&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SLONG&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>seq_curso</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[seq_curso (dm_curso)]</local-name>
+            <parent-name>[dm_curso]</parent-name>
+            <remote-alias>seq_curso</remote-alias>
+            <ordinal>28</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <contains-null>false</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_INTEGER&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SLONG&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>cod_curso</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[cod_curso]</local-name>
+            <parent-name>[dm_curso]</parent-name>
+            <remote-alias>cod_curso</remote-alias>
+            <ordinal>29</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <contains-null>false</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_INTEGER&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SLONG&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>nome</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[nome]</local-name>
+            <parent-name>[dm_curso]</parent-name>
+            <remote-alias>nome</remote-alias>
+            <ordinal>30</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>100</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LROOT' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>centro</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[centro]</local-name>
+            <parent-name>[dm_curso]</parent-name>
+            <remote-alias>centro</remote-alias>
+            <ordinal>31</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>100</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LROOT' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>seq_evento</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[seq_evento (dm_evento)]</local-name>
+            <parent-name>[dm_evento]</parent-name>
+            <remote-alias>seq_evento</remote-alias>
+            <ordinal>32</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <contains-null>false</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_INTEGER&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SLONG&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>cod_evento</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[cod_evento]</local-name>
+            <parent-name>[dm_evento]</parent-name>
+            <remote-alias>cod_evento</remote-alias>
+            <ordinal>33</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <contains-null>false</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_INTEGER&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SLONG&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>ano</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[ano]</local-name>
+            <parent-name>[dm_evento]</parent-name>
+            <remote-alias>ano</remote-alias>
+            <ordinal>34</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_INTEGER&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SLONG&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>descricao</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[descricao]</local-name>
+            <parent-name>[dm_evento]</parent-name>
+            <remote-alias>descricao</remote-alias>
+            <ordinal>35</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>100</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LROOT' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>seq_regiao</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[seq_regiao (dm_regiao)]</local-name>
+            <parent-name>[dm_regiao]</parent-name>
+            <remote-alias>seq_regiao</remote-alias>
+            <ordinal>36</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <contains-null>false</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_INTEGER&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SLONG&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>cod_candidato</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[cod_candidato (dm_regiao)]</local-name>
+            <parent-name>[dm_regiao]</parent-name>
+            <remote-alias>cod_candidato</remote-alias>
+            <ordinal>37</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <contains-null>false</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_INTEGER&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SLONG&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>pais</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[pais]</local-name>
+            <parent-name>[dm_regiao]</parent-name>
+            <remote-alias>pais</remote-alias>
+            <ordinal>38</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>6</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LROOT' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>estado</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[estado]</local-name>
+            <parent-name>[dm_regiao]</parent-name>
+            <remote-alias>estado</remote-alias>
+            <ordinal>39</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>2</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LROOT' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>cidade</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[cidade]</local-name>
+            <parent-name>[dm_regiao]</parent-name>
+            <remote-alias>cidade</remote-alias>
+            <ordinal>40</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>40</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LROOT' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>bairro</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[bairro]</local-name>
+            <parent-name>[dm_regiao]</parent-name>
+            <remote-alias>bairro</remote-alias>
+            <ordinal>41</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>20</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LROOT' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>seq_socioeconomico</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[seq_socioeconomico (dm_socioeconomico)]</local-name>
+            <parent-name>[dm_socioeconomico]</parent-name>
+            <remote-alias>seq_socioeconomico</remote-alias>
+            <ordinal>42</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <contains-null>false</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_INTEGER&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SLONG&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>cod_candidato</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[cod_candidato (dm_socioeconomico)]</local-name>
+            <parent-name>[dm_socioeconomico]</parent-name>
+            <remote-alias>cod_candidato</remote-alias>
+            <ordinal>43</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <contains-null>false</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_INTEGER&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SLONG&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>faixa_etaria</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[faixa_etaria]</local-name>
+            <parent-name>[dm_socioeconomico]</parent-name>
+            <remote-alias>faixa_etaria</remote-alias>
+            <ordinal>44</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>45</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LROOT' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>renda_familiar</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[renda_familiar]</local-name>
+            <parent-name>[dm_socioeconomico]</parent-name>
+            <remote-alias>renda_familiar</remote-alias>
+            <ordinal>45</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>30</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LROOT' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+        <calculation class='tableau' formula='1' />
+      </column>
+      <column caption='Ano' datatype='integer' name='[ano]' role='dimension' type='quantitative' />
+      <column caption='Aprovado' datatype='integer' name='[aprovado]' role='measure' type='quantitative' />
+      <column caption='Bairro' datatype='string' name='[bairro]' role='dimension' type='nominal' />
+      <column caption='Centro' datatype='string' name='[centro]' role='dimension' type='nominal' />
+      <column caption='Cidade' datatype='string' name='[cidade]' role='dimension' type='nominal' />
+      <column caption='Cod Candidato (Dm Regiao)' datatype='integer' name='[cod_candidato (dm_regiao)]' role='measure' type='quantitative' />
+      <column caption='Cod Candidato (Dm Socioeconomico)' datatype='integer' name='[cod_candidato (dm_socioeconomico)]' role='measure' type='quantitative' />
+      <column caption='Cod Candidato' datatype='integer' name='[cod_candidato]' role='measure' type='quantitative' />
+      <column caption='Cod Curso' datatype='integer' name='[cod_curso]' role='measure' type='quantitative' />
+      <column caption='Cod Evento' datatype='integer' name='[cod_evento]' role='measure' type='quantitative' />
+      <column caption='Descricao' datatype='string' name='[descricao]' role='dimension' type='nominal' />
+      <column caption='Estado' datatype='string' name='[estado]' role='dimension' type='nominal' />
+      <column caption='Faixa Etaria' datatype='string' name='[faixa_etaria]' role='dimension' type='nominal' />
+      <column caption='Idade' datatype='integer' name='[idade]' role='measure' type='quantitative' />
+      <column caption='Nome' datatype='string' name='[nome]' role='dimension' type='nominal' />
+      <column caption='Nota Biologia' datatype='real' name='[nota_biologia]' role='measure' type='quantitative' />
+      <column caption='Nota Fisica' datatype='real' name='[nota_fisica]' role='measure' type='quantitative' />
+      <column caption='Nota Geral' datatype='real' name='[nota_geral]' role='measure' type='quantitative' />
+      <column caption='Nota Lingua Estrangeira' datatype='real' name='[nota_lingua_estrangeira]' role='measure' type='quantitative' />
+      <column caption='Nota Matematica' datatype='real' name='[nota_matematica]' role='measure' type='quantitative' />
+      <column caption='Nota Quimica' datatype='real' name='[nota_quimica]' role='measure' type='quantitative' />
+      <column caption='Opcao' datatype='string' name='[opcao]' role='dimension' type='nominal' />
+      <column caption='Pais' datatype='string' name='[pais]' role='dimension' type='nominal' />
+      <column caption='Pre Vest' datatype='string' name='[pre_vest]' role='dimension' type='nominal' />
+      <column caption='Renda Familiar' datatype='string' name='[renda_familiar]' role='dimension' type='nominal' />
+      <column aggregation='Sum' caption='Seq Candidato (Dm Candidato)' datatype='integer' name='[seq_candidato (dm_candidato)]' role='dimension' type='ordinal' />
+      <column aggregation='Sum' caption='Seq Candidato' datatype='integer' name='[seq_candidato]' role='dimension' type='ordinal' />
+      <column aggregation='Sum' caption='Seq Curso (Dm Curso)' datatype='integer' name='[seq_curso (dm_curso)]' role='dimension' type='ordinal' />
+      <column aggregation='Sum' caption='Seq Curso' datatype='integer' name='[seq_curso]' role='dimension' type='ordinal' />
+      <column caption='Seq Desempenho' datatype='integer' name='[seq_desempenho]' role='measure' type='quantitative' />
+      <column aggregation='Sum' caption='Seq Evento (Dm Evento)' datatype='integer' name='[seq_evento (dm_evento)]' role='dimension' type='ordinal' />
+      <column aggregation='Sum' caption='Seq Evento' datatype='integer' name='[seq_evento]' role='dimension' type='ordinal' />
+      <column aggregation='Sum' caption='Seq Regiao (Dm Regiao)' datatype='integer' name='[seq_regiao (dm_regiao)]' role='dimension' type='ordinal' />
+      <column aggregation='Sum' caption='Seq Regiao' datatype='integer' name='[seq_regiao]' role='dimension' type='ordinal' />
+      <column aggregation='Sum' caption='Seq Socioeconomico (Dm Socioeconomico)' datatype='integer' name='[seq_socioeconomico (dm_socioeconomico)]' role='dimension' type='ordinal' />
+      <column aggregation='Sum' caption='Seq Socioeconomico' datatype='integer' name='[seq_socioeconomico]' role='dimension' type='ordinal' />
+      <column caption='Sexo' datatype='string' name='[sexo]' role='dimension' type='nominal' />
+      <column caption='Total Exatas' datatype='real' name='[total_exatas]' role='measure' type='quantitative' />
+      <column caption='Total Humanas' datatype='real' name='[total_humanas]' role='measure' type='quantitative' />
+      <column caption='Trabalha' datatype='string' name='[trabalha]' role='dimension' type='nominal' />
+      <layout dim-ordering='alphabetic' dim-percentage='0.5' measure-ordering='alphabetic' measure-percentage='0.4' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;Brasil&quot;' />
+      </semantic-values>
+      <date-options start-of-week='monday' />
+    </datasource>
+  </datasources>
   <worksheets>
     <worksheet name='Planilha 1'>
       <table>
