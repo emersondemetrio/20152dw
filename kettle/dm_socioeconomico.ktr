@@ -339,11 +339,15 @@
         <length>-2</length>
         <precision>-2</precision>
       </field>      <field>        <name>faixa_etaria</name>
-        <rename>faixa_etaria</rename>
+        <rename/>
         <length>-2</length>
         <precision>-2</precision>
       </field>      <field>        <name>seq_socioeconomico</name>
-        <rename>seq_socioeconomico</rename>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>id_candidato</name>
+        <rename>cod_candidato</rename>
         <length>-2</length>
         <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>
